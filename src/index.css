@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+html, body{
+  @apply m-0 p-0 box-border bg-white
+}
+.padding {
+  @apply px-5 md:px-10 xl:px-64;
+}
+
+.card-placeholder{
+  @apply h-56 w-40 rounded-2xl border-2 p-5 border-black grid items-center font-bold text-black text-center
+}
+
+.card{
+  @apply  h-56 w-40 rounded-2xl bg-white text-black border -outline-offset-8 outline  hover:-translate-y-3 duration-300 shadow-md
+}
