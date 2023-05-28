@@ -3,70 +3,100 @@ import { createContext, useState } from "react";
 export const AppContext = createContext();
 export const AppUpdateContext = createContext();
 
-const defaultRestaurants = [
-  "Jollibee",
-  "McDonald's",
-  "KFC",
-  "Mang Inasal",
-  "Chowking",
-  "Bonchon",
-];
-
 export function AppProvider({ children }) {
-  const [recoRestaurants, setRecoRestaurants] = useState(defaultRestaurants);
-  const [restaurantChoices, setRestaurantChoices] = useState([]);
-  const [chosenRestaurant, setChosenRestaurant] = useState();
+  const [options, setOptions] = useState([]);
+  const [recommendations, setRecommendations] = useState([]);
+  const [chosenOption, setChosenOption] = useState("");
+  const [hasCardFlipped, setHasCardFlipped] = useState(false);
 
-  const addRestaurant = (e, restaurant) => {
+  const addOption = (e, option) => {
     e.preventDefault();
-    if (restaurant) {
-      setRestaurantChoices((currentRestaurants) => {
-        return [...currentRestaurants, restaurant];
+    if (option && !options.includes(option)) {
+      setOptions((currOptions) => {
+        return [...currOptions, option];
       });
-      setRecoRestaurants((currentReco) => {
-        return currentReco.filter(
-          (recoRestaurant) => restaurant !== recoRestaurant
+      setRecommendations((currRecommendations) => {
+        return currRecommendations.filter(
+          (currRecommendation) => option !== currRecommendation
         );
       });
       e.target.value = "";
     } else {
-      console.log("Empty Input Form");
+      console.log("Invalid Input");
     }
   };
 
-  const removeRestaurant = (restaurant) => {
-    if (restaurantChoices.includes(restaurant)) {
-      setRestaurantChoices((currRestaurant) => {
-        return currRestaurant.filter(
-          (restaurantChoices) => restaurantChoices !== restaurant
-        );
+  const removeOption = (option) => {
+    if (options.includes(option)) {
+      setOptions((currOptions) => {
+        return currOptions.filter((currOption) => option !== currOption);
       });
-      setRecoRestaurants((currRecommendation) => {
-        return [...currRecommendation, restaurant];
+
+      setRecommendations((currRecommendations) => {
+        return [...currRecommendations, option];
       });
-      console.log("Bura natin ", restaurant);
-    } else {
-      console.log("Empty Input Form");
+    }
+
+    if (option === chosenOption) {
+      setChosenOption("");
+      setHasCardFlipped(false);
     }
   };
 
-  const shuffleRestaurants = (chosenRestaurants) => {
-    for (let i = chosenRestaurants.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [chosenRestaurants[i], chosenRestaurants[j]] = [
-        chosenRestaurants[j],
-        chosenRestaurants[i],
-      ];
-    }
-    setRestaurantChoices(() => [...chosenRestaurants]);
+  const removeAllOptions = (options) => {
+    options.map((option) => {
+      if (options.includes(option)) {
+        setOptions((currOptions) => {
+          return currOptions.filter((currOption) => option !== currOption);
+        });
+
+        setRecommendations((currRecommendations) => {
+          return [...currRecommendations, option];
+        });
+      }
+
+      if (option === chosenOption) {
+        setChosenOption("");
+        setHasCardFlipped(false);
+      }
+    });
+  };
+
+  const randomPick = () => {
+    setChosenOption(() => options[Math.floor(Math.random() * options.length)]);
+  };
+
+  const shuffleOptions = (options) => {
+    setTimeout(() => {
+      for (let i = options.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [options[i], options[j]] = [options[j], options[i]];
+      }
+      setOptions(() => [...options]);
+    }, 1000);
   };
 
   return (
     <AppContext.Provider
-      value={{ restaurantChoices, setRestaurantChoices, recoRestaurants }}
+      value={{
+        options,
+        setOptions,
+        recommendations,
+        chosenOption,
+        hasCardFlipped,
+      }}
     >
       <AppUpdateContext.Provider
-        value={{ addRestaurant, removeRestaurant, shuffleRestaurants }}
+        value={{
+          addOption,
+          removeOption,
+          removeAllOptions,
+          shuffleOptions,
+          setChosenOption,
+          setHasCardFlipped,
+          randomPick,
+          setRecommendations,
+        }}
       >
         {children}
       </AppUpdateContext.Provider>

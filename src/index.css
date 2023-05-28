@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -24,14 +23,24 @@ body{
 }
 
 .card-design{
-  @apply h-56 w-40 rounded-2xl bg-white text-black border -outline-offset-8 outline  hover:-translate-y-3 duration-300 shadow-xl
+  @apply h-56 w-40 rounded-2xl bg-white text-black border -outline-offset-8 outline
 }
 
 .cover{
   @apply z-40 absolute w-full h-full bg-black bottom-0 top-0 right-0 left-0 duration-300  flex items-center justify-center gap-5 font-bold text-white
 }
 
+.button{
+  @apply  py-3 rounded-xl underline-offset-2 underline
+}
 
+nav a{
+  @apply py-1 border border-black rounded-md px-5
+}
+
+nav a.active{
+  @apply underline font-bold bg-black text-white
+}
 
 
 /* Style for the card */
@@ -45,8 +54,16 @@ body{
   transition: transform 0.8s;
 }
 
-.card:hover .card-inner {
+/* .card:hover .card-inner {
   transform: rotateY(180deg);
+} */
+.card-flip {
+  display: absolute;
+  transform: rotateY(180deg);
+  scale: 105%;
+  --tw-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  --tw-shadow-colored: 0 25px 50px -12px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
 .card-front,
@@ -64,10 +81,7 @@ body{
 }
 
 .card-back {
-  display: grid;
-  align-items: center;
-  height: 100%;
-  width: 100%;
+  @apply grid items-center h-full w-full bg-black rounded-xl text-white border -outline-offset-8 outline
 }
 
 .card-content {
