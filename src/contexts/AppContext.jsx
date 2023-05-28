@@ -6,6 +6,7 @@ export const AppUpdateContext = createContext();
 const defaultRestaurants = [
   "Jollibee",
   "McDonald's",
+  "KFC",
   "Mang Inasal",
   "Chowking",
   "Bonchon",
@@ -13,12 +14,13 @@ const defaultRestaurants = [
 
 export function AppProvider({ children }) {
   const [recoRestaurants, setRecoRestaurants] = useState(defaultRestaurants);
-  const [chosenRestaurant, setChosenRestaurant] = useState([]);
+  const [restaurantChoices, setRestaurantChoices] = useState([]);
+  const [chosenRestaurant, setChosenRestaurant] = useState();
 
   const addRestaurant = (e, restaurant) => {
     e.preventDefault();
     if (restaurant) {
-      setChosenRestaurant((currentRestaurants) => {
+      setRestaurantChoices((currentRestaurants) => {
         return [...currentRestaurants, restaurant];
       });
       setRecoRestaurants((currentReco) => {
@@ -33,14 +35,14 @@ export function AppProvider({ children }) {
   };
 
   const removeRestaurant = (restaurant) => {
-    if (chosenRestaurant.includes(restaurant)) {
-      setChosenRestaurant((currentRestaurant) => {
-        return currentRestaurant.filter(
-          (chosenRestaurant) => chosenRestaurant !== restaurant
+    if (restaurantChoices.includes(restaurant)) {
+      setRestaurantChoices((currRestaurant) => {
+        return currRestaurant.filter(
+          (restaurantChoices) => restaurantChoices !== restaurant
         );
       });
-      setRecoRestaurants((currentReco) => {
-        return [...currentReco, restaurant];
+      setRecoRestaurants((currRecommendation) => {
+        return [...currRecommendation, restaurant];
       });
       console.log("Bura natin ", restaurant);
     } else {
@@ -48,11 +50,24 @@ export function AppProvider({ children }) {
     }
   };
 
+  const shuffleRestaurants = (chosenRestaurants) => {
+    for (let i = chosenRestaurants.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [chosenRestaurants[i], chosenRestaurants[j]] = [
+        chosenRestaurants[j],
+        chosenRestaurants[i],
+      ];
+    }
+    setRestaurantChoices(() => [...chosenRestaurants]);
+  };
+
   return (
     <AppContext.Provider
-      value={{ chosenRestaurant, setChosenRestaurant, recoRestaurants }}
+      value={{ restaurantChoices, setRestaurantChoices, recoRestaurants }}
     >
-      <AppUpdateContext.Provider value={{ addRestaurant, removeRestaurant }}>
+      <AppUpdateContext.Provider
+        value={{ addRestaurant, removeRestaurant, shuffleRestaurants }}
+      >
         {children}
       </AppUpdateContext.Provider>
     </AppContext.Provider>

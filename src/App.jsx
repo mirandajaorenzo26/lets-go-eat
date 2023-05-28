@@ -11,7 +11,7 @@ function App() {
       <div className="padding">
         <Header />
       </div>
-      <div className="padding">
+      <div className="padding p-10">
         <AppProvider>
           <AddRestaurantForm />
           <Suggestions />

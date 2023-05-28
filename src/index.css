@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,16 +8,72 @@
 }
 
 html, body{
-  @apply m-0 p-0 box-border bg-white
+  @apply m-0 p-0 box-border bg-white min-h-full
 }
+
+body{
+  @apply min-h-full grid items-center
+}
+
 .padding {
-  @apply px-5 md:px-10 xl:px-64;
+  @apply px-5 md:px-10 xl:px-64
 }
 
 .card-placeholder{
-  @apply h-56 w-40 rounded-2xl border-2 p-5 border-black grid items-center font-bold text-black text-center
+  @apply h-56 w-40 rounded-2xl border-2 p-5 border-white grid items-center font-bold text-white text-center
 }
 
-.card{
-  @apply  h-56 w-40 rounded-2xl bg-white text-black border -outline-offset-8 outline  hover:-translate-y-3 duration-300 shadow-md
+.card-design{
+  @apply h-56 w-40 rounded-2xl bg-white text-black border -outline-offset-8 outline  hover:-translate-y-3 duration-300 shadow-xl
+}
+
+.cover{
+  @apply z-40 absolute w-full h-full bg-black bottom-0 top-0 right-0 left-0 duration-300  flex items-center justify-center gap-5 font-bold text-white
+}
+
+
+
+
+/* Style for the card */
+.card {
+  perspective: 1000px;
+}
+
+.card-inner {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.8s;
+}
+
+.card:hover .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  backface-visibility: hidden;
+}
+
+.card-front {
+  transform: rotateY(180deg);
+  display: grid;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.card-back {
+  display: grid;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.card-content {
+  height: 100%;
+  padding: 20px;
+  display: grid;
+  text-align: center;
+  place-items: center;
 }

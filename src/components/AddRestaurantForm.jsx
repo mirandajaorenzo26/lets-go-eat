@@ -9,7 +9,7 @@ function AddRestaurantForm() {
   return (
     <div className="my-5 text-center">
       <h1 className="text-4xl font-bold">
-        Hmm... Let&apos;s see where you&apos;ll eat
+        Hmm... let&apos;s see where you&apos;ll eat
       </h1>
       <form
         className="my-5 flex w-full rounded-xl border-2 border-dashed border-neutral-400 px-5 py-3"
