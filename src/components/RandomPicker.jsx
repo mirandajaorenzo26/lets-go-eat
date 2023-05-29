@@ -29,7 +29,7 @@ function RandomPicker() {
             return (
               <div
                 key={option}
-                className="my-1 flex justify-between rounded-xl border-2  border-neutral-300 px-5 py-3"
+                className="animate__animated animate__bounceIn my-1 flex justify-between rounded-xl border-2 border-neutral-300 px-5 py-3"
               >
                 <p className="font-bold">{option}</p>
                 <button onClick={() => removeOption(option)}>

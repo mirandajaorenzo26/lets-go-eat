@@ -11,7 +11,7 @@ import RandomPicker from "./components/RandomPicker";
 function App() {
   return (
     <>
-      <div className="padding py-10">
+      <div className="padding min-h-screen py-5 pt-20">
         <AppProvider>
           <Header />
           <AddRestaurantForm />
@@ -32,9 +32,9 @@ function App() {
           </Routes>
         </AppProvider>
       </div>
-      {/* <div className="padding relative z-10 grid h-[20vh] items-center bg-black text-white">
+      <div className="padding relative z-10 grid items-center bg-black py-10 text-white">
         <Footer />
-      </div> */}
+      </div>
     </>
   );
 }

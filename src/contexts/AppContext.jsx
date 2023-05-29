@@ -1,4 +1,7 @@
-import { createContext, useState } from "react";
+import { Modal } from "@mui/material";
+import { createContext, useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const AppContext = createContext();
 export const AppUpdateContext = createContext();
@@ -8,6 +11,15 @@ export function AppProvider({ children }) {
   const [recommendations, setRecommendations] = useState([]);
   const [chosenOption, setChosenOption] = useState("");
   const [hasCardFlipped, setHasCardFlipped] = useState(false);
+  const [isRecommendationOn, setIsRecommendationOn] = useState(false);
+
+  const openRecommendation = () => {
+    setIsRecommendationOn(true);
+  };
+
+  const closeRecommendation = () => {
+    setIsRecommendationOn(false);
+  };
 
   const addOption = (e, option) => {
     e.preventDefault();
@@ -22,7 +34,12 @@ export function AppProvider({ children }) {
       });
       e.target.value = "";
     } else {
-      console.log("Invalid Input");
+      if (option === "") {
+        notify("Invalid Input");
+        return;
+      }
+
+      notify(option + " has already been added");
     }
   };
 
@@ -76,11 +93,34 @@ export function AppProvider({ children }) {
     }, 1000);
   };
 
+  const notify = (message) =>
+    toast.error(message, {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+
+  const [showResult, setShowResult] = useState(false);
+  const handleOpen = () => setShowResult(true);
+  const handleClose = () => setShowResult(false);
+
+  useEffect(() => {
+    if (chosenOption !== "") {
+      handleOpen();
+    }
+  }, [chosenOption]);
+
   return (
     <AppContext.Provider
       value={{
         options,
         setOptions,
+        isRecommendationOn,
         recommendations,
         chosenOption,
         hasCardFlipped,
@@ -96,9 +136,34 @@ export function AppProvider({ children }) {
           setHasCardFlipped,
           randomPick,
           setRecommendations,
+          openRecommendation,
+          closeRecommendation,
         }}
       >
         {children}
+
+        <ToastContainer
+          position="top-right"
+          autoClose={2000}
+          hideProgressBar
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="colored"
+        />
+
+        <Modal open={showResult} onClose={handleClose}>
+          <div className="pointer-events-none flex h-full items-center justify-center p-5">
+            <div className=" pointer-events-auto  rounded-xl bg-white p-5">
+              <p className="px-10 py-5 text-2xl">
+                <span className="font-bold">{chosenOption}</span> won!
+              </p>
+            </div>
+          </div>
+        </Modal>
       </AppUpdateContext.Provider>
     </AppContext.Provider>
   );

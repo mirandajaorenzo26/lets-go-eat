@@ -23,7 +23,7 @@ function Cards() {
 
   return (
     <div className="animate__animated animate__slideInUp">
-      <div className="mb-5 flex justify-center border-b-2 border-black py-5 text-2xl text-black">
+      <div className="mb-5 flex justify-center border-b-2 border-black py-5 text-center text-2xl text-black">
         {chosenOption ? (
           <h2>
             You draw{" "}
