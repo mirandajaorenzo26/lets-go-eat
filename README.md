@@ -2,7 +2,6 @@
 
 The Decision Helper Application is a helpful tool designed to assist users when they are feeling indecisive about something. Whether you're unsure about which option to choose or simply want the application to make a decision for you, this application has got you covered.
 
-
 ## Table of contents
 
 - [Overview](#overview)
@@ -14,7 +13,6 @@ The Decision Helper Application is a helpful tool designed to assist users when 
   - [What I learned](#what-i-learned)
 - [Author](#author)
 
-
 ## Overview
 
 ### The challenge
@@ -25,8 +23,8 @@ The Decision Helper Application is a helpful tool designed to assist users when 
 
 ### Screenshot
 
-![Desktop Preview](/screenshots/desktop-preview.png?raw=true 'Desktop Preview')
-![Mobile Preview](/screenshots/mobile-preview.png?raw=true 'Mobile Preview')
+![Desktop Preview](/src/screenshots/desktop-view.png?raw=true "Desktop Preview")
+![Mobile Preview](./src/screenshots/mobile-view.png?raw=true "Mobile Preview")
 
 ### Links
 
