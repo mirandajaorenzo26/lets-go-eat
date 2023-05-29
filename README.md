@@ -1,6 +1,6 @@
 # Randomizer Application
 
-The Decision Helper Application is a helpful tool designed to assist users when they are feeling indecisive about something. Whether you're unsure about which option to choose or simply want the application to make a decision for you, this application has got you covered.
+The Randomizer Application is a helpful tool designed to assist users when they are feeling indecisive about something. Whether you're unsure about which option to choose or simply want the application to make a decision for you, this application has got you covered.
 
 ## Table of contents
 
