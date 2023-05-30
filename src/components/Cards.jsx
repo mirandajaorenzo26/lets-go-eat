@@ -47,7 +47,7 @@ function Cards() {
                 />
                 <p>Shuffling...</p>
               </div>
-              <ul className="flex  w-full flex-wrap justify-center gap-3 ">
+              <ul className="flex w-full justify-start gap-3 overflow-x-scroll  py-3">
                 {options.map((option) => (
                   <li key={option}>
                     <CardItem option={option} />

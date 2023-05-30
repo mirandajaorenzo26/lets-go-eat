@@ -11,7 +11,7 @@ import RandomPicker from "./components/RandomPicker";
 function App() {
   return (
     <>
-      <div className="padding min-h-screen py-5 pt-20">
+      <div className="padding min-h-screen py-5">
         <AppProvider>
           <Header />
           <AddRestaurantForm />
